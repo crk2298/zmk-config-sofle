@@ -5,6 +5,8 @@
  */
 
 #include <behaviors.dtsi>
+#include <dt-bindings/zmk/backlight.h>
+#include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
 
 #define BASE 0
@@ -22,11 +24,55 @@
 
         Main {
             bindings = <
-&kp GRAVE  &kp N1  &kp N2  &kp N3  &kp N4  &kp N5                              &kp N6  &kp N7  &kp N8     &kp N9   &kp N0    &kp F11
-&kp TAB    &kp Q   &kp W   &kp F   &kp P   &kp B                               &kp J   &kp L   &kp U      &kp Y    &kp SEMI  &trans
-&kp LSHFT  &kp A   &kp R   &kp S   &kp T   &kp G                               &kp M   &kp N   &kp E      &kp I    &kp O     &trans
-&kp LCTRL  &kp Z   &kp X   &kp C   &kp D   &kp V   &trans         &trans       &kp K   &kp H   &kp COMMA  &kp DOT  &kp FSLH  &to 1
-                   &trans  &trans  &trans  &trans  &lt 2 ENTER    &lt 1 SPACE  &trans  &trans  &trans     &trans
+&kp GRAVE  &kp N1          &kp N2          &kp N3              &kp N4            &kp N5                                          &kp N6           &kp N7             &kp N8               &kp N9           &kp N0          &kp F11
+&kp TAB    &kp Q           &kp W           &kp F               &kp P             &kp B                                           &kp J            &kp L              &kp U                &kp Y            &kp SEMI        &none
+&kp LSHFT  &mt LEFT_ALT A  &mt LEFT_GUI R  &mt LEFT_CONTROL S  &mt LEFT_SHIFT T  &kp G                                           &kp M            &mt RIGHT_SHIFT N  &mt RIGHT_CONTROL E  &mt RIGHT_GUI I  &mt LEFT_ALT O  &to 6
+&kp LCTRL  &kp Z           &kp X           &kp C               &kp D             &kp V               &none          &kp C_PAUSE  &kp K            &kp H              &kp COMMA            &kp DOT          &kp FSLH        &to 5
+                           &none           &none               &kp ESCAPE        &mt LEFT_ALT MINUS  &lt 3 ENTER    &lt 1 SPACE  &lt 2 BACKSPACE  &lt 4 DELETE       &none                &none
+            >;
+
+            sensor-bindings =
+                <&inc_dec_kp PAGE_UP PAGE_DOWN>,
+                <&inc_dec_kp C_VOLUME_UP C_VOLUME_DOWN>;
+        };
+
+        numbers {
+            bindings = <
+&none  &none  &none   &none   &none       &none                          &none  &none            &none              &none          &none         &none
+&none  &none  &kp N7  &kp N8  &kp N9      &none                          &none  &none            &none              &none          &none         &none
+&none  &none  &kp N4  &kp N5  &kp N6      &kp EQUAL                      &none  &kp RIGHT_SHIFT  &kp RIGHT_CONTROL  &kp RIGHT_GUI  &kp LEFT_ALT  &none
+&none  &none  &kp N1  &kp N2  &kp N3      &kp HASH   &none        &none  &none  &none            &none              &none          &none         &none
+              &none   &none   &kp PERIOD  &kp N0     &kp MINUS    &none  &none  &none            &none              &none
+            >;
+        };
+
+        symbols {
+            bindings = <
+&none  &none          &none             &none              &none                 &none                                  &none  &none            &none              &none          &none         &none
+&none  &none          &kp PIPE          &none              &kp DOLLAR            &none                                  &none  &none            &none              &none          &none         &none
+&none  &kp SEMICOLON  &kp EXCL          &kp SINGLE_QUOTE   &kp HASH              &none                                  &none  &kp RIGHT_SHIFT  &kp RIGHT_CONTROL  &kp RIGHT_GUI  &kp LEFT_ALT  &none
+&none  &kp TILDE      &kp LEFT_BRACKET  &kp DOUBLE_QUOTES  &kp RIGHT_BRACKET     &none                  &none    &none  &none  &none            &none              &none          &none         &none
+                      &none             &none              &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &none    &none  &none  &none            &none              &none
+            >;
+        };
+
+        arrows {
+            bindings = <
+&none  &none         &none         &none             &none           &none                  &none  &none           &none           &none         &none            &none
+&none  &none         &none         &none             &none           &none                  &none  &none           &none           &none         &none            &none
+&none  &kp LEFT_ALT  &kp LEFT_GUI  &kp LEFT_CONTROL  &kp LEFT_SHIFT  &none                  &none  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT_ARROW  &none
+&none  &none         &none         &none             &none           &none  &none    &none  &none  &none           &none           &none         &none            &none
+                     &none         &none             &none           &none  &none    &none  &none  &none           &none           &none
+            >;
+        };
+
+        functions {
+            bindings = <
+&none  &kp F1   &kp F2  &kp F3  &kp F4  &kp F5                  &kp F6  &kp F7  &kp F8  &kp F9  &kp F10  &none
+&none  &kp F12  &kp F7  &kp F8  &kp F9  &none                   &none   &none   &none   &none   &none    &none
+&none  &kp F11  &kp F4  &kp F5  &kp F6  &none                   &none   &none   &none   &none   &none    &none
+&none  &kp F10  &kp F1  &kp F2  &kp F3  &none   &none    &none  &none   &none   &none   &none   &none    &none
+                &none   &none   &none   &none   &none    &none  &none   &none   &none   &none
             >;
         };
 
@@ -41,33 +87,53 @@
             //               | GUI | ALT  | CTRL | LOWER|  ENTER |  | SPACE | RAISE| CTRL  | ALT   | GUI  |
 
             bindings = <
-&kp GRAVE  &kp N1  &kp N2    &kp N3    &kp N4     &kp N5                           &kp N6  &kp N7     &kp N8     &kp N9    &kp N0    &none
-&kp ESC    &kp Q   &kp W     &kp E     &kp R      &kp T                            &kp Y   &kp U      &kp I      &kp O     &kp P     &kp BSPC
-&kp TAB    &kp A   &kp S     &kp D     &kp F      &kp G                            &kp H   &kp J      &kp K      &kp L     &kp SEMI  &kp SQT
-&kp LSHFT  &kp Z   &kp X     &kp C     &kp V      &kp B   &kp C_MUTE    &none      &kp N   &kp M      &kp COMMA  &kp DOT   &kp FSLH  &to 0
-                   &kp LGUI  &kp LALT  &kp LCTRL  &mo 1   &kp RET       &kp SPACE  &mo 1   &kp RCTRL  &kp RALT   &kp RGUI
+&kp GRAVE         &kp N1  &kp N2  &kp N3  &kp N4      &kp N5                               &kp N6         &kp N7      &kp N8     &kp N9   &kp N0    &none
+&kp TAB           &kp Q   &kp W   &kp E   &kp R       &kp T                                &kp Y          &kp U       &kp I      &kp O    &kp P     &none
+&kp LEFT_SHIFT    &kp A   &kp S   &kp D   &kp F       &kp G                                &kp H          &kp J       &kp K      &kp L    &kp SEMI  &none
+&kp LEFT_CONTROL  &kp Z   &kp X   &kp C   &kp V       &kp B         &kp C_MUTE    &none    &kp N          &kp M       &kp COMMA  &kp DOT  &kp FSLH  &to 0
+                          &none   &none   &kp ESCAPE  &kp LEFT_ALT  &kp SPACE     &kp RET  &kp BACKSPACE  &kp DELETE  &none      &none
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
         };
 
-        arrows {
+        layers {
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans                    &trans  &trans          &trans          &trans        &trans           &trans
-&trans  &trans  &trans  &trans  &trans  &trans                    &trans  &trans          &trans          &trans        &trans           &trans
-&trans  &trans  &trans  &trans  &trans  &trans                    &trans  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT_ARROW  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans          &trans          &trans        &trans           &trans
-                &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans          &trans          &trans
+&none  &none  &none  &none  &none  &none                  &none  &none  &none  &none  &none  &none
+&none  &none  &none  &none  &none  &none                  &none  &none  &none  &none  &none  &none
+&none  &none  &none  &none  &none  &none                  &none  &none  &none  &none  &none  &none
+&none  &none  &to 7  &to 8  &to 9  &none  &none    &none  &none  &none  &none  &none  &none  &to 0
+              &none  &none  &none  &none  &none    &none  &none  &none  &none  &none
             >;
         };
 
-        numbers {
+        league {
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans                       &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &kp N7  &kp N8  &kp N9  &trans                       &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &kp N4  &kp N5  &kp N6  &kp N7                       &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &kp N1  &kp N2  &kp N3  &trans  &trans       &trans  &trans  &trans  &trans  &trans  &trans  &trans
-                &trans  &trans  &trans  &kp N0  &kp MINUS    &trans  &trans  &trans  &trans  &trans
+&none  &none  &none  &none  &none  &none                  &none  &none  &none  &none  &none  &none
+&none  &none  &none  &none  &none  &none                  &none  &none  &none  &none  &none  &none
+&none  &none  &none  &none  &none  &none                  &none  &none  &none  &none  &none  &none
+&none  &none  &none  &none  &none  &none  &none    &none  &none  &none  &none  &none  &none  &to 0
+              &none  &none  &none  &none  &none    &none  &none  &none  &none  &none
+            >;
+        };
+
+        bluetooth {
+            bindings = <
+&none  &none  &none  &none  &none  &bt BT_CLR_ALL                       &bt BT_CLR_ALL  &none  &none  &none  &none  &none
+&none  &none  &none  &none  &none  &bt BT_CLR                           &none           &none  &none  &none  &none  &none
+&none  &none  &none  &none  &none  &none                                &none           &none  &none  &none  &none  &none
+&none  &none  &none  &none  &none  &none           &none         &none  &none           &none  &none  &none  &none  &to 0
+              &none  &none  &none  &bt BT_PRV      &bt BT_NXT    &none  &none           &none  &none  &none
+            >;
+        };
+
+        led {
+            bindings = <
+&none  &none  &none       &none       &none  &none                  &none  &none  &none  &none  &none  &none
+&none  &none  &none       &none       &none  &none                  &none  &none  &none  &none  &none  &none
+&none  &none  &bl BL_DEC  &bl BL_INC  &none  &none                  &none  &none  &none  &none  &none  &none
+&none  &none  &bl BL_OFF  &bl BL_ON   &none  &none  &none    &none  &none  &none  &none  &none  &none  &to 0
+              &none       &none       &none  &none  &none    &none  &none  &none  &none  &none
             >;
         };
     };
