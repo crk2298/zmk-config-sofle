@@ -25,7 +25,7 @@
         Main {
             bindings = <
 &kp GRAVE  &kp N1          &kp N2          &kp N3              &kp N4            &kp N5                                           &kp N6           &kp N7             &kp N8               &kp N9           &kp N0          &kp F11
-&kp TAB    &kp Q           &kp W           &kp F               &kp P             &kp B                                            &kp J            &kp L              &kp U                &kp Y            &kp SEMI        &none
+&kp TAB    &kp Q           &kp W           &kp F               &kp P             &kp B                                            &kp J            &kp L              &kp U                &kp Y            &kp SEMI        &trans
 &kp LSHFT  &mt LEFT_ALT A  &mt LEFT_GUI R  &mt LEFT_CONTROL S  &mt LEFT_SHIFT T  &kp G                                            &kp M            &mt RIGHT_SHIFT N  &mt RIGHT_CONTROL E  &mt RIGHT_GUI I  &mt LEFT_ALT O  &to 6
 &kp LCTRL  &kp Z           &kp X           &kp C               &kp D             &kp V               &none          &kp C_PAUSE   &kp K            &kp H              &kp COMMA            &kp DOT          &kp FSLH        &to 5
                            &none           &none               &kp ESCAPE        &mt LEFT_ALT MINUS  &lt 3 SPACE    &lt 1 RETURN  &lt 2 BACKSPACE  &lt 4 DELETE       &none                &none
